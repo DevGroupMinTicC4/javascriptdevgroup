@@ -8,8 +8,7 @@ import  Home  from './Components/Home';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {Footer} from './Components/layout/Footer';
 import React,{ useState } from 'react';
-import Producto from './Components/Producto';
-import img from "./assets/img/tennis.jpg";
+
 
 
 
