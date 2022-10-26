@@ -1,14 +1,24 @@
 import React from "react";
 import "../stylesheets/productos.css";
+import { Producto } from "./Producto";
 
-function Productos(){
+function Productos({productos}){
+  console.log(productos)
     return(
         <>
           <div className="titulo">
             <h3>Nuestros productos</h3>
           </div>
           <section className="productos-container">
-            <article className="card">
+            {
+              productos.map(p=><Producto 
+                img={p.img}
+                nombre={p.nombre}
+                descripcion={p.descripcion}
+                precio={p.precio}
+              />)
+            }
+            {/* <article className="card">
               <img className="imagen" src={require('../assets/img/air.jpg')} alt="Air Force One"/>
               <div className="card-info">
                 <h3>Air Force One</h3>
@@ -115,7 +125,7 @@ function Productos(){
                 <p className="precio">120$</p>
                 <button className="button">Agregar al carro</button>
               </div>
-            </article>
+            </article> */}
           </section>
         </>
     )
