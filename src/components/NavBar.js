@@ -5,7 +5,7 @@ import "../stylesheets/navBar.css";
 
 function NavBar() {
   return (
-    <div className="container">
+    <div className="containers">
       <img src={ropa} className="nav-img"></img>
       <nav>
         <ul className="nav-menu">

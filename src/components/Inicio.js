@@ -7,7 +7,7 @@ function Inicio() {
       <div className="login">
         <h3>
           Soy <a href="http://localhost:3000/home">Usuario</a> o{" "}
-          <a href="http://localhost:3000">Administrador</a>
+          <a href="http://localhost:3000/admin">Administrador</a>
         </h3>
         <div className="sesion">
           <form className="form">

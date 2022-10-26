@@ -1,4 +1,4 @@
-.container{
+.containers{
     background-color: #222;
     color: white;
     padding: 10px;
@@ -7,11 +7,11 @@
     align-items: center;
     justify-content: space-around;
 }
-.container .subcontainer{
+.containers .subcontainers{
     width: 800px;
     margin: 0 auto;
 }
-.container .subcontainer div{
+.containers .subcontainers div{
     display: inline-block;
     vertical-align: middle;
 }

@@ -1,0 +1,13 @@
+.contenedor{
+    text-align: center;
+    color: white;
+    
+}
+.ventas{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.s{
+    margin: 20px;
+}
