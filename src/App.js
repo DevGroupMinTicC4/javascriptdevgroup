@@ -8,6 +8,7 @@ import Productos from "./components/Productos";
 import Footer from "./components/Footer";
 import { Tabla } from "./components/Tabla";
 import { Ventas } from "./components/Ventas";
+import Carro from "./components/Carro";
 
 function App() {
   const [productos,setProductos]=useState([
@@ -122,6 +123,7 @@ function App() {
             <Route path="/home" element={[<NavBar />, <Productos productos={productos}/>, <Footer/>]}></Route>
             <Route path='/admin' element={[<NavBarAdmin/>,<Tabla productos={productos}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin/>,<Ventas ventas={ventas}/>]}/>
+            <Route path="/carro" element={[<NavBar/>, <Carro/>]}></Route>
           </Routes>
         </div>
       </div>

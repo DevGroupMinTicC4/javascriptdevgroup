@@ -32,7 +32,6 @@
 }
 
 .form input{
-    width: 50%;
     margin: 1rem auto;
     border: none;
     background-color: transparent;
@@ -46,7 +45,7 @@
     border: 1px solid #4ad295;
     background-color: #4ad295;
     padding: 8px;
-    width: 30%;
+    width: 50%;
     margin: 2rem auto;
     border-radius: .5rem;
     cursor: pointer;

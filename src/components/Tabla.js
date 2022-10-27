@@ -7,7 +7,7 @@ export const Tabla = ({productos}) => {
   <>
     <div className={`container ${s.tabla}`}>
       <br/>
-        <h1>tabla de productos</h1>
+        <h1>Tabla de productos</h1>
           <br />
           <Button color='success'>insertar un nuevo producto</Button>
           <br />
@@ -15,9 +15,9 @@ export const Tabla = ({productos}) => {
             <thead className='text-light'>
               <tr>
                 <th>img</th>
-                <th>producto</th>
-                <th>precio </th>
-                <th>acciones</th>
+                <th>Producto</th>
+                <th>Precio </th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody className='text-light'>

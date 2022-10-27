@@ -13,6 +13,10 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+a {
+  background-color: transparent;
+}
+
 .input{
   padding: 5px;
   outline: none;
@@ -39,4 +43,8 @@ body{
 .btn-normal{
   background-color:rgb(82, 82, 82);
   color: rgb(255, 255, 255);
+}
+
+h3{
+  font-size: 1.3rem;
 }

@@ -3,6 +3,7 @@
     flex-direction: column;
     color:white;
     text-align: center;
+    align-items: center;
 }
 .tabla button{
     position: relative;

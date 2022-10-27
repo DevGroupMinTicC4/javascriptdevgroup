@@ -6,7 +6,7 @@ export const Ventas = ({ventas}) => {
   
   return (
     <div className={s.contenedor}>
-      <h1>ventas</h1>
+      <h1>Ventas</h1>
       <div className={s.ventas}>
         {
           ventas.map((v,i)=><Venta venta={v} index={i}/>)

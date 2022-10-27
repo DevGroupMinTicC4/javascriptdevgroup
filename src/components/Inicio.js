@@ -11,11 +11,11 @@ function Inicio() {
         </h3>
         <div className="sesion">
           <form className="form">
-            <label form="nombre">Nombre</label>
+            <label form="nombre">Email</label>
             <input
-              type="text"
-              name="nombre"
-              placeholder="Ingrese su nombre"
+              type="email"
+              name="email"
+              placeholder="Ingrese su email"
               autoComplete="none"
               required
             ></input>
