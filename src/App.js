@@ -113,6 +113,27 @@ function App() {
     }]
   }
   ])
+  function editar(info){
+    let nuevo=productos;
+    let obj={
+      id:info.id,
+      img:info.img,
+      nombre:info.nombre,
+      descripcion:info.descripcion,
+      precio:info.precio
+    }
+    nuevo.map((p,i)=>{
+      if(p.id==info.id){
+        nuevo[i]=obj
+      }
+    })
+    setProductos(nuevo)
+
+  }
+  function onClose(id) {
+    console.log("entre")
+    setProductos(oldProductos => oldProductos.filter(p => p.id !== id));
+  }
   return (
     <Router>
       <div className="App">
@@ -120,7 +141,7 @@ function App() {
           <Routes>
             <Route path="/" element={[<NavBar />, <Inicio />, <Footer/>]} />
             <Route path="/home" element={[<NavBar />, <Productos productos={productos}/>, <Footer/>]}></Route>
-            <Route path='/admin' element={[<NavBarAdmin/>,<Tabla productos={productos}/>,<Footer/>]}></Route>
+            <Route path='/admin' element={[<NavBarAdmin/>,<Tabla  editar={editar} productos={productos} onClose={onClose}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin/>,<Ventas ventas={ventas}/>]}/>
           </Routes>
         </div>

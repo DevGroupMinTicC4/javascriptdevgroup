@@ -1,12 +1,14 @@
 import React from "react";
 import "../stylesheets/inicio.css";
+import { Link } from "react-router-dom";
 
 function Inicio() {
   return (
     <div className="body">
       <div className="login">
         <h3>
-          Soy <a href="http://localhost:3000/home">Usuario</a> o{" "}
+          Soy <Link to="/home">Usuario</Link> o{" "}
+          {/* Soy <a href="http://localhost:3000/home"></a> o{" "} */}
           <a href="http://localhost:3000/admin">Administrador</a>
         </h3>
         <div className="sesion">
