@@ -2,8 +2,9 @@
     background-color: rgb(53, 34, 34);
     text-align: center;
     margin: 0 auto;
-    margin-top: 6rem;
+    margin-top: 3rem;
     width: 330px;
+    height: 430px;
     color: #fdfdfd;
     border-radius: 1rem;
 }
@@ -17,7 +18,7 @@
 }
 
 .sesion{
-    margin-top: 2rem;
+    margin-top: 0rem auto;
     display: flex;
     flex-direction: column;
 }
@@ -32,22 +33,22 @@
 }
 
 .form input{
-    width: 50%;
     margin: 1rem auto;
     border: none;
-    background-color: transparent;
+    background-color: #fdfdfde3;
     border-bottom: 1px solid #4ad295;
-    color: #fdfdfd;
+    color: #0e0404;
     outline: none;
-    padding: 5px;
+    padding: 9px;
+    width: 80%;
 }
 
 .form-btn{
     border: 1px solid #4ad295;
     background-color: #4ad295;
     padding: 8px;
-    width: 30%;
-    margin: 2rem auto;
+    width: 50%;
+    margin: 0rem auto;
     border-radius: .5rem;
     cursor: pointer;
 }

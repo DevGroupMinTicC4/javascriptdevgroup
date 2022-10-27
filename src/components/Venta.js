@@ -9,15 +9,15 @@ export const Venta = ({venta, index}) => {
     <div className={s.s}>
         <div className={`card text-white bg-success mb-3`}>
             <div className="card-header">
-                <h2>venta numero {index}</h2>
+                <h2>Venta #{index}</h2>
             </div>
             <div className="card-body">
-                <h5 className="card-title">comprador {venta.comprador}</h5>
+                <h5 className="card-title">Comprador: {venta.comprador}</h5>
                 <ul>
-                    <li>cedula = {venta.cedula}</li>
-                    <li>productos comprados = {venta.productos[0].producto.nombre}</li>
-                    <li>cantidad = {venta.productos[0].cantidad}</li>
-                    <li>venta total = {venta.productos[0].cantidad*venta.productos[0].producto.precio}$</li>
+                    <li>Documento: {venta.cedula}</li>
+                    <li>Productos: {venta.productos[0].producto.nombre}</li>
+                    <li>Cantidad = {venta.productos[0].cantidad}</li>
+                    <li>Total = {venta.productos[0].cantidad*venta.productos[0].producto.precio}$</li>
                 </ul>    
             </div>
         </div>

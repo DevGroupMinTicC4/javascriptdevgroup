@@ -1,0 +1,35 @@
+.carro-container{
+    margin-top: 4rem;
+    text-align: center;
+    color: #fdfdfd;
+    font-size: 1.3rem;
+    height: 100vh;    
+}
+
+.carro-container h3{
+    font-size: 1.6rem;
+}
+
+.margin{
+    margin-bottom: 3rem;
+}
+
+.comprar-p{
+    margin-top: 1rem;
+    border: 2px solid #4ad295;
+    background-color: #4ad295;
+    border-radius: 5px;
+    padding: 7px;
+    text-decoration: none;
+    color: #fdfdfd;
+    font-weight: bold;
+    transition: .5s all;
+}
+
+.comprar-p:hover{
+    background: transparent;
+    border: 2px solid #4ad295;
+    color: #fdfdfd;
+    text-decoration: none;
+}
+

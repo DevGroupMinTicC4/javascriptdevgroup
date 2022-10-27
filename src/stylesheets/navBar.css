@@ -1,17 +1,17 @@
 .containers{
     background-color: #222;
     color: white;
-    padding: 14px;
+    padding: 10px;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
-.containers .subcontainers{
+.container .subcontainer{
     width: 800px;
     margin: 0 auto;
 }
-.containers .subcontainers div{
+.container .subcontainer div{
     display: inline-block;
     vertical-align: middle;
 }
@@ -33,20 +33,12 @@
     transition: .5s all;
 }
 
-/* .nav-menu li:hover{
-    background-color: #4ad295;
-    border: 2px solid #4ad295;
-    padding: 3px;
-    border-radius: .2rem;
-} */
-
-/* .nav-menu li:last-child:hover{
-    background: transparent;
-    border: 2px solid #4ad295;
-} */
+.nav-menu img{
+    width: 50px;
+}
 
 .nav-menu a:hover{
-    color: #080f0c;
+    color: #4ad295;
 }
 
 li{

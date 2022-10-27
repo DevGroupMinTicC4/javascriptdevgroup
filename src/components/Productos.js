@@ -3,7 +3,7 @@ import "../stylesheets/productos.css";
 import { Producto } from "./Producto";
 
 function Productos({productos}){
-  console.log(productos)
+  // console.log(productos)
     return(
         <>
           <div className="titulo">

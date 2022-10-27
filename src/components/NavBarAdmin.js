@@ -8,9 +8,9 @@ function NavBarAdmin() {
       <img src={ropa} className="nav-img" alt="logo"></img>
       <nav>
         <ul className="nav-menu">
-          <li><a href='http://localhost:3000/'>principal</a></li>
-          <li><a href='http://localhost:3000/admin'>tabla</a></li>
-          <li><a href='http://localhost:3000/ventas'>ver ventas </a></li>
+          <li><a href='http://localhost:3000/'>Principal</a></li>
+          <li><a href='http://localhost:3000/admin'>Tabla</a></li>
+          <li><a href='http://localhost:3000/ventas'>Ver ventas </a></li>
         </ul>
       </nav>
     </div>
