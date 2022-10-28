@@ -9,7 +9,7 @@ function Inicio() {
         <h3>
           Soy <Link to="/home">Usuario</Link> o{" "}
           {/* Soy <a href="http://localhost:3000/home"></a> o{" "} */}
-          <a href="http://localhost:3000/admin">Administrador</a>
+          <Link to="/admin">Administrador</Link>
         </h3>
         <div className="sesion">
           <form className="form">

@@ -131,6 +131,12 @@ function App() {
     setProductos(nuevo)
 
   }
+  function crear(info){
+    info.img="defecto";
+    console.log(info)
+    let nuevo=[info]
+    setProductos((prev)=>[...prev,...nuevo])
+  }
   function onClose(id) {
     console.log("entre")
     setProductos(oldProductos => oldProductos.filter(p => p.id !== id));
@@ -142,7 +148,7 @@ function App() {
           <Routes>
             <Route path="/" element={[<NavBar />, <Inicio />, <Footer/>]} />
             <Route path="/home" element={[<NavBar />, <Productos productos={productos}/>, <Footer/>]}></Route>
-            <Route path='/admin' element={[<NavBarAdmin/>,<Tabla  editar={editar} productos={productos} onClose={onClose}/>,<Footer/>]}></Route>
+            <Route path='/admin' element={[<NavBarAdmin/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin/>,<Ventas ventas={ventas}/>]}/>
             <Route path="/carro" element={[<NavBar/>, <Carro/>]}></Route>
           </Routes>

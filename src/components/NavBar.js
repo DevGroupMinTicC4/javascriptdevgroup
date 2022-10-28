@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ropa from "../assets/img/laundry.png"
 import "../stylesheets/navBar.css";
 
@@ -8,9 +9,9 @@ function NavBar() {
       <img src={ropa} className="nav-img"></img>
       <nav>
         <ul className="nav-menu">
-          <li><a href="http://localhost:3000/">Inicio</a></li>
-          <li><a href="http://localhost:3000/home">Productos</a></li>
-          <li><a href="http://localhost:3000/carro"><img src={require('../assets/img/carrito-de-compras.png')} className="carrito"></img></a></li>
+          <li><Link to="/">Inicio</Link></li>
+          <li><Link to="/home">Productos</Link></li>
+          <li><Link to="/carro"><img src={require('../assets/img/carrito-de-compras.png')} className="carrito"></img></Link></li>
         </ul>
       </nav>
     </div>
