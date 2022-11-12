@@ -28,16 +28,27 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
     setId(dato.id);
     setImg(dato.img);
     setAbierto((actual) => {
-      if (actual == true) {
+      if (actual === true) {
         return false;
       } else {
         return true;
       }
+      
+    });
+  }
+  function cerrar(){
+    setAbierto((actual) => {
+      if (actual === true) {
+        return false;
+      } else {
+        return true;
+      }
+      
     });
   }
   function abrir(){
     setAbierto2((actual) => {
-      if (actual == true) {
+      if (actual === true) {
         return false;
       } else {
         return true;
@@ -98,8 +109,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                 abrir();
               }}
               color="success"
-            >
-              crear
+            >crear
             </Button>
             <Button onClick={abrir} color="success">
               cerrar
@@ -178,13 +188,13 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                             descripcion: descripcion,
                             img: img,
                           });
-                          abrirModal();
+                          cerrar();
                         }}
                         color="success"
                       >
                         editar
                       </Button>
-                      <Button onClick={abrirModal} color="success">
+                      <Button onClick={() => abrirModal(dato)} color="success">
                         cerrar
                       </Button>
                     </ModalFooter>

@@ -1,5 +1,6 @@
 import React from 'react'
 import s from '../stylesheets/venta.module.css'
+import Productos from './Productos'
 
 export const Venta = ({venta, index}) => {
     console.log(venta)
@@ -12,12 +13,17 @@ export const Venta = ({venta, index}) => {
                 <h2>Venta #{index}</h2>
             </div>
             <div className="card-body">
-                <h5 className="card-title">Comprador: {venta.comprador}</h5>
+                <h5 className="card-title">Comprador: {venta.nombre}</h5>
                 <ul>
                     <li>Documento: {venta.cedula}</li>
-                    <li>Productos: {venta.productos[0].producto.nombre}</li>
-                    <li>Cantidad = {venta.productos[0].cantidad}</li>
-                    <li>Total = {venta.productos[0].cantidad*venta.productos[0].producto.precio}$</li>
+                    <li>Direccion de envio: {venta.direccion}</li> 
+                    <li>Forma de pago: {venta.forma}</li>
+                    <li> productos comprados</li>
+                    <br></br>
+                    {
+                        venta.productos.map(p=>(<p>{p.nombre} X {p.cantidad}</p>))
+                    }
+                    <li> total de venta = {venta.total} $</li>
                 </ul>    
             </div>
         </div>

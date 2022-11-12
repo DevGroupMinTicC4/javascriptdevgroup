@@ -3,7 +3,7 @@ import Inicio from "./components/Inicio";
 import NavBar from "./components/NavBar";
 import NavBarAdmin from "./components/NavBarAdmin"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Productos from "./components/Productos";
 import Footer from "./components/Footer";
 import { Tabla } from "./components/Tabla";
@@ -11,6 +11,7 @@ import { Ventas } from "./components/Ventas";
 import Carro from "./components/Carro";
 
 function App() {
+  const [carrito,setCarrito]=useState([]);
   const [productos,setProductos]=useState([
     {
       id:1,
@@ -97,23 +98,7 @@ function App() {
       precio:"120"
     }
   ])
-  const [ventas,setVentas]=useState([{
-    comprador:"juan perez",
-    cedula:"1018469823",
-    productos:[{
-      producto:productos[0],
-      cantidad:2,
-    }]
-  },
-  {
-    comprador:"santiago canal",
-    cedula:"30730567",
-    productos:[{
-      producto:productos[8],
-      cantidad:1,
-    }]
-  }
-  ])
+  const [ventas,setVentas]=useState([])
   function editar(info){
     let nuevo=productos;
     let obj={
@@ -133,24 +118,80 @@ function App() {
   }
   function crear(info){
     info.img="defecto";
-    console.log(info)
     let nuevo=[info]
     setProductos((prev)=>[...prev,...nuevo])
   }
   function onClose(id) {
     console.log("entre")
-    setProductos(oldProductos => oldProductos.filter(p => p.id !== id));
+    setProductos(oldProductos => oldProductos.filter((p,i) => i !== id));
+  }
+  function onCarrito(id) {
+    setCarrito(oldProductos => oldProductos.filter(p => p.id !== id));
+  }
+  function agregarCompra(name){
+    // if(carrito.length!=0){
+    //   let nuevo=productos.map(p=>{
+    //     if(p.cantidad){
+    //       delete p.cantidad
+    //     }
+    //   })
+    //   console.log("este es la cantidad " +nuevo[0].cantidad)
+    // }
+
+    // console.log("producto "+productos[0].nombre+"cantidad"+productos[0].cantidad)
+    // console.log("carrito "+carrito.length)
+    //   for(let i =0;i<carrito.length;i++){
+    //     if (carrito[i].id==name.id){
+    //       name[cantidad]=name.cantidad+1
+    //     }
+    //   }
+    //   if(!name.cantidad){
+    //     console.log("primera unidad")
+    //     name.cantidad=
+        setCarrito(prev=>[...prev,...[name]])
+      // }
+  }
+  function onGo(){
+  }
+  function menosUno(){
+
+  }
+  useEffect(()=>{
+    setCarrito([])
+    
+  },[ventas])
+  let contador=0
+  function agregarVenta(nombre,cedula,direccion,carrito,sumatoria,pago){
+    alert("compra realiza tu pedido estara listo en 15 dias")
+    console.log("hola");
+    contador=0;
+    let info={
+      nombre:nombre,
+      cedula:cedula,
+      direccion:direccion,
+      forma:pago,
+      productos:carrito,
+      total:sumatoria
+
+    }
+    console.log(info)
+    if(ventas.length>0){
+      setVentas((prev) => [...prev,...[info]])
+    }else{
+      setVentas([info])
+    }
+
   }
   return (
     <Router>
       <div className="App">
         <div>
           <Routes>
-            <Route path="/" element={[<NavBar />, <Inicio />, <Footer/>]} />
-            <Route path="/home" element={[<NavBar />, <Productos productos={productos}/>, <Footer/>]}></Route>
-            <Route path='/admin' element={[<NavBarAdmin/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
-            <Route path='/ventas' element={[<NavBarAdmin/>,<Ventas ventas={ventas}/>]}/>
-            <Route path="/carro" element={[<NavBar/>, <Carro/>]}></Route>
+            <Route path="/" element={[<NavBar onGo={onGo}numero=""/>, <Inicio />, <Footer/>]} />
+            <Route path="/home" element={[<NavBar/>, <Productos agregarCompra={agregarCompra}  productos={productos} carrito={carrito}/>, <Footer/>]}></Route>
+            <Route path='/admin' element={[<NavBarAdmin onGo={onGo}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
+            <Route path='/ventas' element={[<NavBarAdmin onGo={onGo}/>,<Ventas  ventas={ventas}/>]}/>
+            <Route path="/carro" element={[<NavBar/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
           </Routes>
         </div>
       </div>

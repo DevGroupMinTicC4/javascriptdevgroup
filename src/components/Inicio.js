@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../stylesheets/inicio.css";
 import { Link } from "react-router-dom";
 
 function Inicio() {
+  const [input,setInput]=useState({email:"",password:""})
   return (
     <div className="body">
       <div className="login">

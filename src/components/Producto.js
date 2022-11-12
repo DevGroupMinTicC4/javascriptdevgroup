@@ -1,7 +1,6 @@
 import React from 'react'
 import "../stylesheets/productos.css";
-export const Producto = ({img,nombre,descripcion,precio}) => {
-    console.log(img)
+export const Producto = ({img,nombre,descripcion,precio, agregarCompra}) => {
     return (
         <>
             <article className="card">
@@ -10,7 +9,7 @@ export const Producto = ({img,nombre,descripcion,precio}) => {
                         <h3>{nombre}</h3>
                         <p className="descripcion">{descripcion}</p>
                         <p className="precio">{precio}$</p>
-                        <button className="button">Agregar al carro</button>
+                        <button className="button" onClick={agregarCompra}>Agregar al carro</button>
                     </div>
             </article>
         </>

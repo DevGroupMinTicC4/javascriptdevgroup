@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../stylesheets/productos.css";
 import { Producto } from "./Producto";
 
-function Productos({productos}){
-  // console.log(productos)
-    return(
+function Productos({productos, agregarCompra}){
+  return(
         <>
           <div className="titulo">
             <h3>Nuestros productos</h3>
@@ -16,6 +15,7 @@ function Productos({productos}){
                 nombre={p.nombre}
                 descripcion={p.descripcion}
                 precio={p.precio}
+                agregarCompra={()=>agregarCompra(p)}
               />)
             }
             {/* <article className="card">
