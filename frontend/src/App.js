@@ -18,6 +18,7 @@ function App() {
       img:'air',
       nombre:"Air Force One",
       descripcion:"Las zapatillas Air Force 1 son un icono de estilo y perfección. Descubre nuestras colecciones.",
+      cantidad:"5",
       precio:"25"
     },
     {
@@ -25,6 +26,7 @@ function App() {
       img:'hoddies',
       nombre:"Colección de abrigos",
       descripcion:"Colección de abrigos de varios colores para hombre y mujer de todas las tallas, S, M, XL, XXL",
+      cantidad:"5",
       precio:"15"
     },
     {
@@ -32,6 +34,7 @@ function App() {
       img:'gafas',
       nombre:"Gafas de sol",
       descripcion:"NIEEPA Gafas de sol polarizadas deportivas para hombre con marco cuadrado NP1007",
+      cantidad:"5",
       precio:"25"
     },
     {
@@ -39,6 +42,7 @@ function App() {
       img:'buzo',
       nombre:"Buzo cuello redondo",
       descripcion:"oklama Cuello redondo exclusivo de Union X The Big Steppers Tour de algodon",
+      cantidad:"5",
       precio:"25"
     },
     {
@@ -46,6 +50,7 @@ function App() {
       img:'nirvana',
       nombre:"Camisa nirvana para mujer",
       descripcion:"Camiseta manga corta print Nirvana Tallas XS, M, S, L",
+      cantidad:"5",
       precio:"50"
     },
     {
@@ -53,6 +58,7 @@ function App() {
       img:'bolso',
       nombre:"Bolso de cuero",
       descripcion:"Bolso asa cadena efecto cocodrilo - Mas vendidos",
+      cantidad:"5",
       precio:"45"
     },
     {
@@ -60,6 +66,7 @@ function App() {
       img:'abrigo',
       nombre:"Abrigo Trench - Mujer",
       descripcion:"Abrigo trench largo efecto suede Tallas XS, M, L",
+      cantidad:"5",
       precio:"80"
     },
     {
@@ -67,6 +74,7 @@ function App() {
       img:'set',
       nombre:"Sets de pendientes",
       descripcion:"Set 9 pendientes cascada pedrería color dorado",
+      cantidad:"5",
       precio:"100"
     },
     {
@@ -74,6 +82,7 @@ function App() {
       img:'puffy',
       nombre:"Cazadora puffy",
       descripcion:"Cazadora puffy pana Tallas S, M, L, XL en varios colores",
+      cantidad:"5",
       precio:"20"
     },
     {
@@ -81,6 +90,7 @@ function App() {
       img:'pantalones',
       nombre:"Pantalón wide",
       descripcion:"Pantalón wide cargo hilo contraste disponoble en 4 colores",
+      cantidad:"5",
       precio:"30"
     },
     {
@@ -88,6 +98,7 @@ function App() {
       img:'sudadera',
       nombre:"Sudadera Rolling Stones",
       descripcion:"Sudadera print Rolling Stones Tallas XS, S, M, L, XS",
+      cantidad:"5",
       precio:"100"
     },
     {
@@ -95,6 +106,7 @@ function App() {
       img:'zapatillas',
       nombre:"Zapatillas monocolor",
       descripcion:"Zapatillas monocolor hombre Tallas 36 en adelante",
+      cantidad:"5",
       precio:"120"
     }
   ])
@@ -106,6 +118,7 @@ function App() {
       img:info.img,
       nombre:info.nombre,
       descripcion:info.descripcion,
+      cantidad:info.cantidad,
       precio:info.precio
     }
     nuevo.map((p,i)=>{
@@ -123,33 +136,16 @@ function App() {
   }
   function onClose(id) {
     console.log("entre")
-    setProductos(oldProductos => oldProductos.filter((p,i) => i !== id));
+    setProductos(oldProductos => oldProductos.filter((p) => p.id !== id));
   }
   function onCarrito(id) {
-    setCarrito(oldProductos => oldProductos.filter(p => p.id !== id));
+    console.log(id)
+    let nuevo=carrito.filter((c,i)=>i!==id)
+    console.log(nuevo)
+    setCarrito(nuevo)
   }
   function agregarCompra(name){
-    // if(carrito.length!=0){
-    //   let nuevo=productos.map(p=>{
-    //     if(p.cantidad){
-    //       delete p.cantidad
-    //     }
-    //   })
-    //   console.log("este es la cantidad " +nuevo[0].cantidad)
-    // }
-
-    // console.log("producto "+productos[0].nombre+"cantidad"+productos[0].cantidad)
-    // console.log("carrito "+carrito.length)
-    //   for(let i =0;i<carrito.length;i++){
-    //     if (carrito[i].id==name.id){
-    //       name[cantidad]=name.cantidad+1
-    //     }
-    //   }
-    //   if(!name.cantidad){
-    //     console.log("primera unidad")
-    //     name.cantidad=
         setCarrito(prev=>[...prev,...[name]])
-      // }
   }
   function onGo(){
   }
@@ -162,7 +158,7 @@ function App() {
   },[ventas])
   let contador=0
   function agregarVenta(nombre,cedula,direccion,carrito,sumatoria,pago){
-    alert("compra realiza tu pedido estara listo en 15 dias")
+    prompt("si continuas escribe tu nombre y tu compra sera aceptada tu pedido estara listo en 15 dias")
     console.log("hola");
     contador=0;
     let info={
@@ -180,18 +176,26 @@ function App() {
     }else{
       setVentas([info])
     }
-
+    let nuevo=productos
+    for(let i=0; i<carrito.length; i++){
+      for(let j=0; j<nuevo.length; j++){
+        if(carrito[i].id==nuevo[j].id){
+          nuevo[j].cantidad=nuevo[j].cantidad-1
+        }
+      }
+    }
+    setProductos(nuevo)
   }
   return (
     <Router>
       <div className="App">
         <div>
           <Routes>
-            <Route path="/" element={[<NavBar onGo={onGo}numero=""/>, <Inicio />, <Footer/>]} />
-            <Route path="/home" element={[<NavBar/>, <Productos agregarCompra={agregarCompra}  productos={productos} carrito={carrito}/>, <Footer/>]}></Route>
+            <Route path="/" element={[<NavBar  carrito={carrito}/>, <Inicio />, <Footer/>]} />
+            <Route path="/home" element={[<NavBar  carrito={carrito}/>, <Productos agregarCompra={agregarCompra}  productos={productos} carrito={carrito}/>, <Footer/>]}></Route>
             <Route path='/admin' element={[<NavBarAdmin onGo={onGo}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin onGo={onGo}/>,<Ventas  ventas={ventas}/>]}/>
-            <Route path="/carro" element={[<NavBar/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
+            <Route path="/carro" element={[<NavBar  carrito={carrito}/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
           </Routes>
         </div>
       </div>

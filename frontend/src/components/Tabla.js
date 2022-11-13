@@ -20,6 +20,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
   const [precio, setPrecio] = useState("");
   const [img, setImg] = useState("");
   const [id, setId] = useState("");
+  const [cantidad,setCantidad]=useState("");
   function abrirModal(dato) {
     console.log(dato);
     setNombre(dato.nombre);
@@ -27,6 +28,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
     setPrecio(dato.precio);
     setId(dato.id);
     setImg(dato.img);
+    setCantidad(dato.cantidad)
     setAbierto((actual) => {
       if (actual === true) {
         return false;
@@ -84,6 +86,15 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
               ></Input>
             </FormGroup>
             <FormGroup>
+              <Label for="cantidad">cantidad</Label>
+              <Input
+                type="text"
+                id="cantidad"
+                value={`${cantidad}`}
+                onChange={(e) => setCantidad(e.target.value)}
+              ></Input>
+            </FormGroup>
+            <FormGroup>
               <Label for="descripcion">Descripcion</Label>
               <br></br>
               <textarea
@@ -105,6 +116,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                   nombre: nombre,
                   precio: precio,
                   descripcion: descripcion,
+                  cantidad:cantidad
                 });
                 abrir();
               }}
@@ -123,6 +135,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
             <tr>
               <th>img</th>
               <th>Producto</th>
+              <th>Cantidad</th>
               <th>Precio </th>
               <th>Acciones</th>
             </tr>
@@ -138,6 +151,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                   />
                 </td>
                 <td>{dato.nombre}</td>
+                <td>{dato.cantidad}</td>
                 <td>{dato.precio} $</td>
                 <td>
                   <Button onClick={() => abrirModal(dato)} color="success">
@@ -165,6 +179,15 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                         ></Input>
                       </FormGroup>
                       <FormGroup>
+                        <Label for="cantidad">cantidad</Label>
+                        <Input
+                          type="text"
+                          id="cantidad"
+                          value={`${cantidad}`}
+                          onChange={(e) => setCantidad(e.target.value)}
+                        ></Input>
+                      </FormGroup>
+                      <FormGroup>
                         <Label for="descripcion">Descripcion</Label>
                         <br></br>
                         <textarea
@@ -185,6 +208,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                             id: id,
                             nombre: nombre,
                             precio: precio,
+                            cantidad: cantidad,
                             descripcion: descripcion,
                             img: img,
                           });

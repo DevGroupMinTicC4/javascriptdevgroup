@@ -42,8 +42,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
         <Link to="/home" className={s.comprarp}>Compra ahora</Link>
         </div>:
         (<>
-        <h2>ventas totales = {sumatoria}</h2>
-        <Button onClick={abrir}>ir a pagar</Button>
+        
         <Modal isOpen={abierto}>
           <ModalHeader>datos venta</ModalHeader>
           <ModalBody>
@@ -124,7 +123,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
             </tr>
           </thead>
           <tbody className="text-light">
-            {carrito.map((dato) => (
+            {carrito.map((dato,i) => (
               <tr key={dato.id}>
                 <td>
                   <img
@@ -135,7 +134,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
                 </td>
                 <td>{dato.nombre}</td>
                 <td>{dato.precio} $</td>
-                <td><Button onClick={()=>onCarrito(dato.id)} color="danger">
+                <td><Button onClick={()=>onCarrito(i)} color="danger">
                     Eliminar
                 </Button>
                 {"  "}
@@ -145,6 +144,12 @@ function Carro({carrito, agregarVenta, onCarrito}){
             ))}
           </tbody>
         </Table>
+        <div>
+          <h5>ventas totales = {sumatoria} $</h5>
+          
+          <Button color="success" onClick={abrir}>ir a pagar</Button>
+        </div>
+        <br></br>
       </div>
       </>)
       }
