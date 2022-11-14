@@ -47,7 +47,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
           <ModalHeader>datos venta</ModalHeader>
           <ModalBody>
             <FormGroup>
-              <Label for="nombre del usuario ">nombre del usuario</Label>
+              <Label for="nombre del usuario ">Nombre del usuario</Label>
               <Input
                 type="text"
                 id="nombre del usuario"
@@ -55,7 +55,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
                 onChange={(e) => setNombre(e.target.value)}
               ></Input>
                <FormGroup>
-              <Label for="cedula ">Cedula</Label>
+              <Label for="cedula ">Cédula</Label>
               <Input
                 type="number"
                 id="cedula"
@@ -65,7 +65,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
             </FormGroup>
             </FormGroup>
             <FormGroup>
-              <Label for="direccion">direccion</Label>
+              <Label for="direccion">Dirección</Label>
               <Input
                 type="text"
                 id="direccion"
@@ -74,14 +74,14 @@ function Carro({carrito, agregarVenta, onCarrito}){
               ></Input>
             </FormGroup>
             <FormGroup>
-                <Label for="forma de pago">forma de pago</Label>
+                <Label for="forma de pago">Forma de pago</Label>
                 <select name="favoriteOnly" value={pago} onChange={(e)=>setPago(e.target.value)} id="favoriteOnly">
                     <option>PSE</option>
                     <option>CREDITO</option>
                 </select>
             </FormGroup>
             <FormGroup>
-                <Label for="productos a pagar">producots a comprar</Label>
+                <Label for="productos a pagar">Productos a comprar</Label>
                 {
                     carrito.map((dato,i)=> (
                         <div className={s.conp}>
@@ -111,7 +111,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
         </Modal>
         <div className={`container ${s.tabla}`}>
             <br />
-            <h1>tus compras</h1>
+            <h1>Tus compras</h1>
             <br />
         <Table>
           <thead className="text-light">
@@ -145,9 +145,9 @@ function Carro({carrito, agregarVenta, onCarrito}){
           </tbody>
         </Table>
         <div>
-          <h5>ventas totales = {sumatoria} $</h5>
+          <h5>Ventas totales = {sumatoria} $</h5>
           
-          <Button color="success" onClick={abrir}>ir a pagar</Button>
+          <Button color="success" onClick={abrir}>Ir a pagar</Button>
         </div>
         <br></br>
       </div>

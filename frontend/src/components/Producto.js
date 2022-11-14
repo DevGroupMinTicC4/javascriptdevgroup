@@ -11,7 +11,7 @@ export const Producto = ({img,nombre,descripcion,precio,cantidad, agregarCompra}
                 
                         <h3>{nombre}</h3>
                         <p className="descripcion">{descripcion}</p>
-                        <p className="unidadesS"> disponible en stock {cantidad} unidades</p>
+                        <p className="unidadesS"> Disponible en stock {cantidad} unidades</p>
                         <p className="precio">{precio}$</p>
                         <button className="button" onClick={agregarCompra}>Agregar al carro</button>
                     </div>

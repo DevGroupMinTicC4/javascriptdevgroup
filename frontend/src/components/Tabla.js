@@ -63,12 +63,12 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
         <br />
         <h1>Tabla de productos</h1>
         <br />
-        <Button onClick={abrir} color="success">insertar un nuevo producto</Button>
+        <Button onClick={abrir} color="success">Insertar un nuevo producto</Button>
         <Modal isOpen={abierto2}>
-          <ModalHeader>crear Producto</ModalHeader>
+          <ModalHeader>Crear Producto</ModalHeader>
           <ModalBody>
             <FormGroup>
-              <Label for="nombre">nombre del producto</Label>
+              <Label for="nombre">Nombre del producto</Label>
               <Input
                 type="text"
                 id="nombre"
@@ -86,7 +86,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
               ></Input>
             </FormGroup>
             <FormGroup>
-              <Label for="cantidad">cantidad</Label>
+              <Label for="cantidad">Cantidad</Label>
               <Input
                 type="text"
                 id="cantidad"
@@ -95,7 +95,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
               ></Input>
             </FormGroup>
             <FormGroup>
-              <Label for="descripcion">Descripcion</Label>
+              <Label for="descripcion">Descripción</Label>
               <br></br>
               <textarea
                 className="descripcion"
@@ -121,10 +121,10 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                 abrir();
               }}
               color="success"
-            >crear
+            >Crear
             </Button>
             <Button onClick={abrir} color="success">
-              cerrar
+              Cerrar
             </Button>
           </ModalFooter>
         </Modal>
@@ -158,10 +158,10 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                     Editar
                   </Button>
                   <Modal isOpen={abierto}>
-                    <ModalHeader>editar</ModalHeader>
+                    <ModalHeader>MODIFICAR PRODUCTO</ModalHeader>
                     <ModalBody>
                       <FormGroup>
-                        <Label for="nombre">nombre del producto</Label>
+                        <Label for="nombre">Nombre del producto</Label>
                         <Input
                           type="text"
                           id="nombre"
@@ -179,7 +179,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                         ></Input>
                       </FormGroup>
                       <FormGroup>
-                        <Label for="cantidad">cantidad</Label>
+                        <Label for="cantidad">Cantidad</Label>
                         <Input
                           type="text"
                           id="cantidad"
@@ -188,7 +188,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                         ></Input>
                       </FormGroup>
                       <FormGroup>
-                        <Label for="descripcion">Descripcion</Label>
+                        <Label for="descripcion">Descripción</Label>
                         <br></br>
                         <textarea
                           className="descripcion"
@@ -216,10 +216,10 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                         }}
                         color="success"
                       >
-                        editar
+                        Guardar
                       </Button>
                       <Button onClick={() => abrirModal(dato)} color="success">
-                        cerrar
+                        Cerrar
                       </Button>
                     </ModalFooter>
                   </Modal>{" "}
