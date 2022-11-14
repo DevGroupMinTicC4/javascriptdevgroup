@@ -8,7 +8,7 @@ export const Venta = ({venta, index}) => {
     index=index+1;
   return (
     <div className={s.s}>
-        <div className={`card text-white bg-success mb-3`}>
+        <div className={`card text-white  mb-3`}>
             <div className="card-header">
                 <h2>Venta #{index}</h2>
             </div>

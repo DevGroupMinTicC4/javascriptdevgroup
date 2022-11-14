@@ -13,7 +13,7 @@ export const getProducts = async(req,res)=>{
 
 export const createProduct=async(req, res)=>{
     try{
-        const { nombre,descripcion, precio } = req.body;
+        const { nombre,descripcion,cantidad, precio } = req.body;
         let img;
         if (req.files.img) {
             const result = await uploadImage(req.files.img.tempFilePath);
@@ -23,7 +23,7 @@ export const createProduct=async(req, res)=>{
                 public_id: result.public_id,
             };
         }
-        const nuevoP=new PRODUCTO({img,nombre,descripcion,precio})
+        const nuevoP=new PRODUCTO({img,nombre,descripcion,cantidad,precio})
         await nuevoP.save()
         return res.json(nuevoP)
     }catch(error){

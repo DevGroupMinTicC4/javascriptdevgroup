@@ -16,6 +16,11 @@ const productoEsquema =new mongoose.Schema({
         required:true,
         trim:true
     },
+    cantidad:{
+        type:Number,
+        required:true,
+        trim:true
+    },
     precio:{
         type:Number,
         required:true,

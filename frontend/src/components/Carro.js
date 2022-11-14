@@ -137,8 +137,7 @@ function Carro({carrito, agregarVenta, onCarrito}){
                 <td><Button onClick={()=>onCarrito(i)} color="danger">
                     Eliminar
                 </Button>
-                {"  "}
-                <Button color="danger">-1</Button>
+                
                 </td>
               </tr>
             ))}

@@ -4,6 +4,9 @@
     color:white;
     text-align: center;
     align-items: center;
+    background-color: rgb(46, 8, 46);
+    opacity: 0.9;
+    margin-top: 20px;
 }
 .tabla button{
     position: relative;

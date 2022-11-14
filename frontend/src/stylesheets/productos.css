@@ -14,7 +14,8 @@
     width: 300px;
     height: auto;
     margin-top: 1rem;
-    background-color: rgb(134, 132, 132);
+    background-color: rgb(46, 8, 46);
+    opacity: 0.9;
     border-radius: 5px;
 }
 
@@ -35,6 +36,7 @@
     line-height: 1;
     text-align: center;
     color: #fdfdfd;
+    opacity: 1;
     padding: 1rem;
 }
 
@@ -45,7 +47,7 @@
 
 .descripcion{
     font-weight: 700;
-    color: rgb(54, 45, 45);
+    color: #fdfdfd;
 }
 
 .card-info p {
@@ -57,7 +59,7 @@
     margin-top: 1rem;
     padding: .5rem;
     border: 2px solid #4caa80;
-    background-color: #4caa80;
+    background-color: rgb(46, 8, 46);
     border-radius: 5px;
     color: #fdfdfd;
     transition: .5s all;
