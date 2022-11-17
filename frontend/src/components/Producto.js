@@ -6,7 +6,7 @@ export const Producto = ({img,nombre,descripcion,precio,cantidad, agregarCompra}
             {
                 cantidad>0?(
                 <article className="card">
-                    <img className="imagen" src={require(`../assets/img/${img}.jpg`)} alt="Air Force One"/>
+                    <img className="imagen" src={img} alt="Air Force One"/>
                     <div className="card-info">
                 
                         <h3>{nombre}</h3>

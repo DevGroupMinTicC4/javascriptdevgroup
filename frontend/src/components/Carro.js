@@ -14,6 +14,7 @@ import {
   } from "reactstrap";
 
 function Carro({carrito, agregarVenta, onCarrito}){
+  console.log("carro",carrito)
     let sumatoria=0
     for(let i=0;i<carrito.length;i++){
       sumatoria=sumatoria+parseFloat(carrito[i].precio)
@@ -124,11 +125,11 @@ function Carro({carrito, agregarVenta, onCarrito}){
           </thead>
           <tbody className="text-light">
             {carrito.map((dato,i) => (
-              <tr key={dato.id}>
+              <tr key={dato._id}>
                 <td>
                   <img
                     className={s.imagens}
-                    src={require(`../assets/img/${dato.img}.jpg`)}
+                    src={dato.img.url}
                     alt="Air Force One"
                   />
                 </td>

@@ -3,7 +3,7 @@ import { Venta } from './Venta'
 import s from '../stylesheets/ventas.module.css'
 
 export const Ventas = ({ventas}) => {
-  
+  console.log(ventas)
   return (
     <div className={s.contenedor}>
       <h1>Ventas</h1>

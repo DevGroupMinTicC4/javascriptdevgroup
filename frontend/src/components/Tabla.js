@@ -19,14 +19,14 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
   const [img, setImg] = useState("");
-  const [id, setId] = useState("");
+  const [_id, setId] = useState("");
   const [cantidad,setCantidad]=useState("");
   function abrirModal(dato) {
     console.log(dato);
     setNombre(dato.nombre);
     setDescripcion(dato.descripcion);
     setPrecio(dato.precio);
-    setId(dato.id);
+    setId(dato._id);
     setImg(dato.img);
     setCantidad(dato.cantidad)
     setAbierto((actual) => {
@@ -49,7 +49,14 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
     });
   }
   function abrir(){
+
     setAbierto2((actual) => {
+      setNombre("");
+    setDescripcion("");
+    setPrecio("");
+    setId("");
+    setImg("");
+    setCantidad("")
       if (actual === true) {
         return false;
       } else {
@@ -67,6 +74,15 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
         <Modal isOpen={abierto2}>
           <ModalHeader>Crear Producto</ModalHeader>
           <ModalBody>
+          <FormGroup>
+              <Label for="imagen">img</Label>
+              <Input
+                type="text"
+                id="imagen"
+                value={img}
+                onChange={(e)=>setImg(e.target.value)}
+              ></Input>
+            </FormGroup>
             <FormGroup>
               <Label for="nombre">Nombre del producto</Label>
               <Input
@@ -98,7 +114,6 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
               <Label for="descripcion">Descripción</Label>
               <br></br>
               <textarea
-                className="descripcion"
                 rows="3"
                 cols="50"
                 type="text"
@@ -112,7 +127,8 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
             <Button
               onClick={() => {
                 crear({
-                  id: productos.length+1,
+                  img:img,
+                  _id: productos.length+1,
                   nombre: nombre,
                   precio: precio,
                   descripcion: descripcion,
@@ -142,11 +158,11 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
           </thead>
           <tbody className="text-light">
             {productos.map((dato) => (
-              <tr key={dato.id}>
+              <tr key={dato._id}>
                 <td>
                   <img
                     className={s.imagens}
-                    src={require(`../assets/img/${dato.img}.jpg`)}
+                    src={dato.img.url}
                     alt="Air Force One"
                   />
                 </td>
@@ -191,7 +207,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                         <Label for="descripcion">Descripción</Label>
                         <br></br>
                         <textarea
-                          className="descripcion"
+                          
                           rows="3"
                           cols="50"
                           type="text"
@@ -205,7 +221,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                       <Button
                         onClick={() => {
                           editar({
-                            id: id,
+                            _id: _id,
                             nombre: nombre,
                             precio: precio,
                             cantidad: cantidad,
@@ -223,7 +239,7 @@ export const Tabla = ({ productos, onClose, editar,crear }) => {
                       </Button>
                     </ModalFooter>
                   </Modal>{" "}
-                  <Button onClick={() => onClose(dato.id)} color="danger">
+                  <Button onClick={() => onClose(dato._id)} color="danger">
                     Eliminar
                   </Button>
                 </td>

@@ -13,19 +13,30 @@ export const getProducts = async(req,res)=>{
 
 export const createProduct=async(req, res)=>{
     try{
-        const { nombre,descripcion,cantidad, precio } = req.body;
-        let img;
-        if (req.files.img) {
-            const result = await uploadImage(req.files.img.tempFilePath);
-            await fs.remove(req.files.img.tempFilePath);
-            img = {
+        console.log(req.body.img)
+        if(req.body.img){
+            const { img,nombre,descripcion,cantidad, precio } = req.body;
+            const nuevoP=new PRODUCTO({img,nombre,descripcion,cantidad,precio})
+            await nuevoP.save()
+            return res.json(nuevoP)
+        }else{
+            const { nombre,descripcion,cantidad, precio } = req.body;
+            console.log(req.files.img)
+            let img;
+            if (req.files.img) {
+                const result = await uploadImage(req.files.img.tempFilePath);
+                await fs.remove(req.files.img.tempFilePath);
+                console.log("esto es lo que llega ",req.files.img.tempFilePath)
+                img = {
                 url: result.secure_url,
                 public_id: result.public_id,
-            };
+                };
+            }
+            const nuevoP=new PRODUCTO({img,nombre,descripcion,cantidad,precio})
+            await nuevoP.save()
+            return res.json(nuevoP)
         }
-        const nuevoP=new PRODUCTO({img,nombre,descripcion,cantidad,precio})
-        await nuevoP.save()
-        return res.json(nuevoP)
+        
     }catch(error){
         console.log(error);
         return res.status(500).json({ message: error.message });
@@ -34,11 +45,12 @@ export const createProduct=async(req, res)=>{
 
 export const update=async (req, res)=>{
     try {
+        console.log("entraste al metodo update")
         const updatedProduct = await PRODUCTO.findByIdAndUpdate(
         req.params.id,
         req.body,
         {
-            new: true,
+            new: true
         });
         return res.json(updatedProduct);
     } catch (error) {

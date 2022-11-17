@@ -21,9 +21,9 @@ export const Venta = ({venta, index}) => {
                     <li> productos comprados</li>
                     <br></br>
                     {
-                        venta.productos.map(p=>(<p>{p.nombre} X {p.cantidad}</p>))
+                        venta.productos.map(p=>(<p>{p.nombre} </p>))
                     }
-                    <li> total de venta = {venta.total} $</li>
+                    <li> total pagado= {venta.total} $</li>
                 </ul>    
             </div>
         </div>
