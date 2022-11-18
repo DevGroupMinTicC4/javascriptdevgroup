@@ -12,6 +12,8 @@ import Carro from "./components/Carro";
 import axios from 'axios'
 
 function App() {
+  const [carrito,setCarrito]=useState([]);
+  const [productos,setProductos]=useState([])
   useEffect(()=>{
     
     console.log("entraste a la lista de productos")
@@ -26,8 +28,7 @@ function App() {
     })
     .catch((error)=>console.log(error))
   },[])
-  const [carrito,setCarrito]=useState([]);
-  const [productos,setProductos]=useState([])
+  
   //   {
   //     id:1,
   //     img:'air',
@@ -194,7 +195,6 @@ function App() {
     
   },[ventas])
   
-  let contador=0
   function agregarVenta(nombre,cedula,direccion,carrito,sumatoria,pago){
     prompt("si continuas escribe tu nombre y tu compra sera aceptada tu pedido estara listo en 15 dias")
     console.log("hola");
