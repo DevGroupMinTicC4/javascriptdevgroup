@@ -10,14 +10,19 @@ import { Tabla } from "./components/Tabla";
 import { Ventas } from "./components/Ventas";
 import Carro from "./components/Carro";
 import axios from 'axios'
+import { Usuarios } from "./components/Usuarios";
 
 function App() {
   useEffect(()=>{
-    
+    axios.get("http://localhost:4000/users")
+    .then(response => setUsers(response.data))
+    .catch((error)=>console.log(error))
+
     console.log("entraste a la lista de productos")
     axios.get("http://localhost:4000/ventas")
     .then(response=>setVentas(response.data))
     .catch((error)=>console.log(error))
+
     console.log("entraste a la lista de productos")
     axios.get("http://localhost:4000/products")
     .then(response=>{
@@ -28,6 +33,7 @@ function App() {
   },[])
   const [carrito,setCarrito]=useState([]);
   const [productos,setProductos]=useState([])
+  const [users, setUsers] = useState([])
   //   {
   //     id:1,
   //     img:'air',
@@ -247,7 +253,7 @@ function App() {
             <Route path='/admin' element={[<NavBarAdmin onGo={onGo}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin onGo={onGo}/>,<Ventas  ventas={ventas}/>]}/>
             <Route path="/carro" element={[<NavBar  carrito={carrito}/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
-          
+            {/* <Route path="/users" element={[<NavBar carrito={carrito}/>, <Usuarios users={users}/>]}/> */}
           </Routes>
         </div>
       </div>
