@@ -2,6 +2,7 @@ import express from 'express'
 import productsRoutes from './routes/products.routes.js'
 import routerV from './routes/ventas.routes.js';
 import fileupload from 'express-fileupload'
+import routerUsers from './routes/usuarios.routes.js'
 
 const app= express();
 
@@ -15,6 +16,7 @@ app.use(fileupload({
 //routes
 app.use(productsRoutes)
 app.use(routerV)
+app.use(routerUsers)
 
 
 
