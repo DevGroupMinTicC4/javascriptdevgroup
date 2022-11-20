@@ -10,6 +10,7 @@ import { Tabla } from "./components/Tabla";
 import { Ventas } from "./components/Ventas";
 import Carro from "./components/Carro";
 import axios from 'axios'
+import { useDispatch,useSelector } from "react-redux";
 
 function App() {
   const [carrito,setCarrito]=useState([]);
