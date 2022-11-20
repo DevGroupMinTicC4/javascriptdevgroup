@@ -10,23 +10,23 @@ import { Tabla } from "./components/Tabla";
 import { Ventas } from "./components/Ventas";
 import Carro from "./components/Carro";
 import axios from 'axios'
-import { Usuarios } from "./components/Usuarios";
 
 function App() {
   const [carrito,setCarrito]=useState([]);
   const [productos,setProductos]=useState([])
+  //IMPORTACION DEL DISPATCH Y DE LA VARIABLE DEL STORE QUE QUIERA UTILIZAR
+  let dispatch=useDispatch()
+  let detail=useSelector(state=>state.usuarios)
+  let online=useSelector(state=>state.online)
   useEffect(()=>{
-    axios.get("http://localhost:4000/users")
-    .then(response => setUsers(response.data))
-    .catch((error)=>console.log(error))
-
+    
     console.log("entraste a la lista de productos")
-    axios.get("http://localhost:4000/ventas")
+    axios.get("https://devgroup.onrender.com/ventas")
     .then(response=>setVentas(response.data))
     .catch((error)=>console.log(error))
 
     console.log("entraste a la lista de productos")
-    axios.get("http://localhost:4000/products")
+    axios.get("https://devgroup.onrender.com/products")
     .then(response=>{
       console.log(response.data)
       setProductos(response.data)
@@ -151,7 +151,7 @@ function App() {
     setProductos(nuevo)
     axios({
       method: 'put',
-      url:`http://localhost:4000/products/${info._id}`,
+      url:`https://devgroup.onrender.com/products/${info._id}`,
       data:{
         id:info._id,
         nombre:info.nombre,
@@ -170,7 +170,7 @@ function App() {
     setProductos((prev)=>[...prev,...nuevo])
     axios({
       method:'post',
-      url:"http://localhost:4000/products/",
+      url:"https://devgroup.onrender.com/products/",
       data:info
     })
   }
@@ -179,7 +179,7 @@ function App() {
 
     
     setProductos(oldProductos => oldProductos.filter((p) => p._id !== id));
-    axios.delete(`http://localhost:4000/products/${id}`)
+    axios.delete(`https://devgroup.onrender.com/products/${id}`)
     .then(responde=>console.log(responde))
   }
   function onCarrito(id) {
@@ -202,9 +202,6 @@ function App() {
   },[ventas])
   
   function agregarVenta(nombre,cedula,direccion,carrito,sumatoria,pago){
-    prompt("si continuas escribe tu nombre y tu compra sera aceptada tu pedido estara listo en 15 dias")
-    console.log("hola");
-    contador=0;
     let info={
       nombre:nombre,
       cedula:cedula,
@@ -227,7 +224,7 @@ function App() {
           nuevo[j].cantidad=nuevo[j].cantidad-1
           axios({
             method: 'put',
-            url:`http://localhost:4000/products/${nuevo[j]._id}`,
+            url:`https://devgroup.onrender.com/products/${nuevo[j]._id}`,
             data:{
               cantidad:nuevo[j].cantidad
             }
@@ -238,7 +235,7 @@ function App() {
     setProductos(nuevo)
     axios({
       method: 'post',
-      url:`http://localhost:4000/ventas`,
+      url:`https://devgroup.onrender.com/ventas`,
       data:info
     })
 
@@ -253,7 +250,7 @@ function App() {
             <Route path='/admin' element={[<NavBarAdmin onGo={onGo}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
             <Route path='/ventas' element={[<NavBarAdmin onGo={onGo}/>,<Ventas  ventas={ventas}/>]}/>
             <Route path="/carro" element={[<NavBar  carrito={carrito}/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
-            {/* <Route path="/users" element={[<NavBar carrito={carrito}/>, <Usuarios users={users}/>]}/> */}
+          
           </Routes>
         </div>
       </div>
