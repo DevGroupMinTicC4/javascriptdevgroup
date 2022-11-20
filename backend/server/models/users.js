@@ -11,6 +11,10 @@ const usersSchema = new mongoose.Schema ({
     clave:{
         type: String,
         require: true
+    },
+    rol:{
+        type: String,
+        require: true
     }
 })
 

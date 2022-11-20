@@ -13,8 +13,8 @@ export const getUsers = async (req,res)=>{
 
 export const createUsers=async(req, res)=>{
     try{
-        const { nombre,email,clave } = req.body;
-        const newUsers=new users({nombre,email,clave})
+        const { nombre,email,clave,rol } = req.body;
+        const newUsers=new users({nombre,email,clave,rol})
         await newUsers.save()
         return res.json(newUsers)
     }catch(error){

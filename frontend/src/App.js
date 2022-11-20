@@ -10,18 +10,28 @@ import { Tabla } from "./components/Tabla";
 import { Ventas } from "./components/Ventas";
 import Carro from "./components/Carro";
 import axios from 'axios'
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from './redux/actions/index'
+import { Error404 } from "./components/Error404";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const [carrito,setCarrito]=useState([]);
   const [productos,setProductos]=useState([])
+  //IMPORTACION DEL DISPATCH Y DE LA VARIABLE DEL STORE QUE QUIERA UTILIZAR
+  let dispatch=useDispatch()
+  let detail=useSelector(state=>state.usuarios)
+  let online=useSelector(state=>state.online)
   useEffect(()=>{
-    
+    //guardar los usuarios en el store
+    dispatch(actions.getUsuarios())
+    console.log("hola",detail)
     console.log("entraste a la lista de productos")
-    axios.get("http://localhost:4000/ventas")
+    axios.get("https://devgroup.onrender.com/ventas")
     .then(response=>setVentas(response.data))
     .catch((error)=>console.log(error))
     console.log("entraste a la lista de productos")
-    axios.get("http://localhost:4000/products")
+    axios.get("https://devgroup.onrender.com/products")
     .then(response=>{
       console.log(response.data)
       setProductos(response.data)
@@ -145,7 +155,7 @@ function App() {
     setProductos(nuevo)
     axios({
       method: 'put',
-      url:`http://localhost:4000/products/${info._id}`,
+      url:`https://devgroup.onrender.com/products/${info._id}`,
       data:{
         id:info._id,
         nombre:info.nombre,
@@ -164,7 +174,7 @@ function App() {
     setProductos((prev)=>[...prev,...nuevo])
     axios({
       method:'post',
-      url:"http://localhost:4000/products/",
+      url:"https://devgroup.onrender.com/products/",
       data:info
     })
   }
@@ -173,7 +183,7 @@ function App() {
 
     
     setProductos(oldProductos => oldProductos.filter((p) => p._id !== id));
-    axios.delete(`http://localhost:4000/products/${id}`)
+    axios.delete(`https://devgroup.onrender.com/products/${id}`)
     .then(responde=>console.log(responde))
   }
   function onCarrito(id) {
@@ -196,9 +206,6 @@ function App() {
   },[ventas])
   
   function agregarVenta(nombre,cedula,direccion,carrito,sumatoria,pago){
-    prompt("si continuas escribe tu nombre y tu compra sera aceptada tu pedido estara listo en 15 dias")
-    console.log("hola");
-    contador=0;
     let info={
       nombre:nombre,
       cedula:cedula,
@@ -221,7 +228,7 @@ function App() {
           nuevo[j].cantidad=nuevo[j].cantidad-1
           axios({
             method: 'put',
-            url:`http://localhost:4000/products/${nuevo[j]._id}`,
+            url:`https://devgroup.onrender.com/products/${nuevo[j]._id}`,
             data:{
               cantidad:nuevo[j].cantidad
             }
@@ -232,7 +239,7 @@ function App() {
     setProductos(nuevo)
     axios({
       method: 'post',
-      url:`http://localhost:4000/ventas`,
+      url:`https://devgroup.onrender.com/ventas`,
       data:info
     })
 
@@ -242,12 +249,20 @@ function App() {
       <div className="App">
         <div>
           <Routes>
-            <Route path="/" element={[<NavBar  carrito={carrito}/>, <Inicio />, <Footer/>]} />
-            <Route path="/home" element={[<NavBar  carrito={carrito}/>, <Productos  agregarCompra={agregarCompra}  productos={productos} carrito={carrito}/>, <Footer/>]}></Route>
-            <Route path='/admin' element={[<NavBarAdmin onGo={onGo}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
-            <Route path='/ventas' element={[<NavBarAdmin onGo={onGo}/>,<Ventas  ventas={ventas}/>]}/>
-            <Route path="/carro" element={[<NavBar  carrito={carrito}/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
-          
+            <Route path="/" element={[<Inicio />, <Footer/>]} />
+            <Route element={<ProtectedRoute/>}>
+              <Route e path="/home" element={[<NavBar  carrito={carrito}/>, <Productos  agregarCompra={agregarCompra}  productos={productos} carrito={carrito}/>, <Footer/>]}></Route>
+            </Route>
+            <Route element={<ProtectedRoute/>}>
+              <Route path='/admin' element={[<NavBar  carrito={carrito}/>,<Tabla  editar={editar} productos={productos} onClose={onClose} crear={crear}/>,<Footer/>]}></Route>
+            </Route>
+            <Route element={<ProtectedRoute/>}>
+              <Route path='/ventas' element={[<NavBar  carrito={carrito}/>,<Ventas  ventas={ventas}/>]}/>
+            </Route>
+            <Route element={<ProtectedRoute/>}>
+              <Route path="/carro" element={[<NavBar  carrito={carrito}/>, <Carro menosUno={ menosUno} carrito={carrito} agregarVenta={agregarVenta} onCarrito={onCarrito} />]}></Route>
+            </Route>
+            <Route path="*" element={<Error404/>}/>
           </Routes>
         </div>
       </div>

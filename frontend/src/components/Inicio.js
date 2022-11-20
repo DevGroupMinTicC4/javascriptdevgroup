@@ -1,16 +1,89 @@
-import React, { useState } from "react";
+import React, { useReducer, useState,useEffect } from "react";
 import "../stylesheets/inicio.css";
 import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
+import * as actions from "../redux/actions"
+import {Navigate} from 'react-router-dom';
+import {
+  Table,
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  FormGroup,
+  Input,
+  Label,
+  ModalFooter,
+} from "reactstrap";
 
 function Inicio() {
-  const [input,setInput]=useState({email:"",password:""})
+
+  let usuarios=useSelector(state=>state.usuarios)
+  let online=useSelector(state=>state.online)
+  let dispatch=useDispatch();
+  const [abierto, setAbierto] = useState(false);
+  const [input, setInput] = useState({ email: "", password: "" });
+  const [nuevo,setNuevo]= useState({correo:"",contrasena:"",nombre:""})
+  function entrar(e){
+    let bandera=0
+    e.preventDefault()
+    for(let i=0;i<usuarios.length;i++){
+      if(usuarios[i].email===input.email){
+        if(usuarios[i].clave===input.password){
+          console.log("bienvenido ",usuarios[i].nombre)
+          dispatch(actions.editarOnline({entrar:true,nombre:usuarios[i].nombre,i:i,rol:usuarios[i].rol}))
+          bandera=1
+        }
+      }
+    }
+    if(bandera==0){
+      alert("usuario incorrecto")
+    }
+  }
+  function abrir(){
+    if(abierto==false){
+      setAbierto(true)
+    }
+    if(abierto==true){
+      setAbierto(false)
+    }
+  }
+  function handleChangeF(e){
+    setNuevo({...nuevo, [e.target.name]:e.target.value})
+  }
+  function handleChange(e) {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  }
+  function enviar(){
+    let info={
+      nombre:nuevo.nombre,
+      email:nuevo.correo,
+      clave:nuevo.contrasena,
+      rol:'usuario'
+    }
+    //verificando que el correo no exista
+    const found1 =usuarios.find(element=>element.email==info.email)
+    const found2 =usuarios.find(element=>element.nombre==info.nombre)
+    if(found1 || found2) {
+      window.alert("usuario no pudo ser creado usuario o correo ya utilizado")
+    }else{
+      window.alert("usuario creado con exito")
+      dispatch(actions.createUser(info))
+      abrir()
+      setNuevo({correo:"",contrasena:"",nombre:""})
+    }
+    
+
+  }
+  if(online.entrar==true){
+    console.log(online)
+    return <Navigate to='/home'/>
+  }
   return (
     <div className="body">
       <div className="login">
         <h3>
-          Soy <Link to="/home">Usuario</Link> o{" "}
-          {/* Soy <a href="http://localhost:3000/home"></a> o{" "} */}
-          <Link to="/admin">Administrador</Link>
+          LOGIN
         </h3>
         <div className="sesion">
           <form className="form">
@@ -21,6 +94,8 @@ function Inicio() {
               placeholder="Ingrese su email"
               autoComplete="none"
               required
+              value={input.name}
+              onChange={(e) => handleChange(e)}
             ></input>
             <label form="password">Contraseña</label>
             <input
@@ -28,25 +103,71 @@ function Inicio() {
               name="password"
               placeholder="Ingrese su contraseña"
               required
+              value={input.name}
+              onChange={(e) => handleChange(e)}
             ></input>
-            <button type="summit" className="form-btn">
-              Inciar sesión
-            </button>
-            <h3>o</h3>
-            <button type="button" use="hollow" data-no-auto-focus="true" class="brandButton brandButtonBase
-                    hollowButton">
-	            <div class="formgoogle">
-		          <span class=" googleIcon">
-			        <svg class="svg" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill-rule="evenodd" fill-opacity="1" fill="#4285f4" stroke="none"></path>
-                <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.18L12.05 13.56c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.96v2.332C2.44 15.983 5.485 18 9.003 18z" fill-rule="evenodd" fill-opacity="1" fill="#34a853" stroke="none"></path>
-                <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill-rule="evenodd" fill-opacity="1" fill="#fbbc05" stroke="none"></path>
-                <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.428 0 9.002 0 5.485 0 2.44 2.017.96 4.958L3.967 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill-rule="evenodd" fill-opacity="1" fill="#ea4335" stroke="none"></path>
-              </svg>
-              </span>
-              <div class="googleText">Continuar con Google</div>
-	</div>
-</button>
+            <div>
+              <button onClick={(e)=>entrar(e)} type="summit" className="form-btn">
+                Inciar sesión
+              </button>
+              <h3>o</h3>
+              <button  type="summit" className="form-btn" onClick={abrir}>
+                crear usuario
+              </button>
+              <Modal isOpen={abierto}>
+                <ModalHeader>Crear Usuario</ModalHeader>
+                <ModalBody>
+                  <FormGroup>
+                    <Label >nombre del usuario</Label>
+                    <Input
+                      type="text"
+                      name="nombre"
+                      value={nuevo.nombre}
+                      onChange={(e) => handleChangeF(e)}
+                    ></Input>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="contrasena">contraseña</Label>
+                    <Input
+                      type="text"
+                      id="contrasena"
+                      name="contrasena"
+                      value={nuevo.contrasena}
+                      onChange={(e) => handleChangeF(e)}
+                    ></Input>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="contraseña">email</Label>
+                    <Input
+                      type="text"
+                      id="correo"
+                      name="correo"
+                      value={nuevo.correo}
+                      onChange={(e) => handleChangeF(e)}
+                    ></Input>
+                  </FormGroup>
+                </ModalBody>
+                <ModalFooter>
+                <Button 
+                  onClick={(e)=>{
+
+                    enviar()
+                    }} color="success">
+                    crear
+                  </Button>
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      abrir()
+                    }}
+                    color="success"
+                  >
+                    cerrar
+                  </Button>
+                  
+                </ModalFooter>
+              </Modal>
+            </div>
           </form>
         </div>
       </div>
